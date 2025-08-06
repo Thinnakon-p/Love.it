@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ข้อความตกลงมา 3D</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      perspective: 1000px;
+      height: 100vh;
+      font-family: 'Prompt', sans-serif;
+    }
+
+    .word {
+      position: absolute;
+      top: -50px;
+      color: #ffccff;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 0 0 15px #ff66cc;
+      animation: fall linear forwards, float 2s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes fall {
+      to {
+        top: 100vh;
+        transform: translateZ(200px) rotateX(360deg) rotateY(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(0px) rotateY(0deg); }
+      50% { transform: translateX(30px) rotateY(15deg); }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const words = [
+      "น่ารักที่สุดแล้วน้องคนนี้",
+     "น่ารักมาก",
+     "😾😾😾",
+     "😻😻😻",
+     "🧸🤍",
+      "รักเด็กน้อย",
+      "เด็กน้อยขี้น้อยใจ",
+      "เด็กน้อยขี้งอแง",
+      "เด็กน้อยขี้ชนะทุกอย่าง",
+      "เด็กน้อยน่ารักที่สุดในโลก"
+    ];
+
+    function createWord() {
+      const word = document.createElement('div');
+      word.className = 'word';
+      word.textContent = words[Math.floor(Math.random() * words.length)];
+
+      word.style.left = Math.random() * window.innerWidth + 'px';
+
+      const duration = 4 + Math.random() * 4;
+      word.style.animationDuration = `${duration}s, 2s`;
+
+      document.body.appendChild(word);
+
+      setTimeout(() => {
+        word.remove();
+      }, duration * 1000);
+    }
+
+    setInterval(createWord, 400);
+  </script>
+</body>
+</html>
